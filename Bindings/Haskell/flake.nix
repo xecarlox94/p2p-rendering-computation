@@ -1,44 +1,36 @@
 {
-  description = "Description for the project";
+  description = "Nix flake for P2PRC Haskell library";
 
   inputs = {
-    flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    p2prc.url = "../../";
+    # p2prc.url = "../../";
   };
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = { self, nixpkgs, p2prc }:
+    let
 
-      debug = true;
+    allSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
-      imports = [
-        # To import a flake module
-        # 1. Add foo to inputs
-        # 2. Add foo as a parameter to the outputs function
-        # 3. Add here: foo.flakeModule
+    forAllSystems = function:
+      nixpkgs.lib.genAttrs allSystems
+        (system: function {
+            pkgs = import nixpkgs { inherit system; };
+            system = system;
+          }
+        );
 
-      ];
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
 
-      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
-
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        # Per-system attributes can be defined here. The self' and inputs'
-        # module parameters provide easy access to attributes of the same
-        # system.
-
-        # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-        packages.default = pkgs.hello;
-
-        # packages.p2prc = inputs'.p2prc.;
+    in
+    {
+    packages.${system}.default = derivation {
+        name = "simple";
+        # with `with`, we can just do `bash`
+        builder = with pkgs; "${bash}/bin/bash";
+        args = [ "-c" "echo foo > $out" ];
+        src = ./.;
+        system = system;
       };
-
-      flake = {
-        # The usual flake attributes can be defined here, including system-
-        # agnostic ones like nixosModule and system-enumerating ones, although
-        # those are more easily expressed in perSystem.
-
-      };
-
     };
 }
