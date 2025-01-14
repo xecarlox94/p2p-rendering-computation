@@ -3,34 +3,37 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # p2prc.url = "../../";
+    p2prc.url = "../../";
   };
 
-  outputs = { self, nixpkgs, p2prc }:
+  outputs = { nixpkgs, p2prc, ... }:
     let
 
     allSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
     forAllSystems = function:
       nixpkgs.lib.genAttrs allSystems
-        (system: function {
-            pkgs = import nixpkgs { inherit system; };
-            system = system;
+        (system: function
+          {
+            pkgs=nixpkgs.legacyPackages.${system};
+            inherit system;
           }
         );
 
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-
     in
     {
-    packages.${system}.default = derivation {
-        name = "simple";
-        # with `with`, we can just do `bash`
-        builder = with pkgs; "${bash}/bin/bash";
-        args = [ "-c" "echo foo > $out" ];
-        src = ./.;
-        system = system;
-      };
+    packages = forAllSystems ({pkgs, system}:
+      {
+        default = pkgs.cowsay;
+        p2prc=p2prc.outputs.packages.${system}.default;
+      });
+
+    devShells = forAllSystems ({pkgs, system}:
+      {
+        default = pkgs.mkShell {
+          buildInputs = [p2prc.outputs.packages.${system}.default];
+        };
+      });
+
     };
 }
