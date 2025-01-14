@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    p2prc.url = "../../";
+    p2prc.url = "path:../../";
   };
 
   outputs = { nixpkgs, p2prc, ... }:
@@ -34,6 +34,5 @@
           buildInputs = [p2prc.outputs.packages.${system}.default];
         };
       });
-
     };
 }
