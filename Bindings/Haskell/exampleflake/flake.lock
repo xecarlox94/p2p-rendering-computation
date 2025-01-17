@@ -18,7 +18,44 @@
         "type": "github"
       }
     },
+    "hsp2prc": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "dir": "Bindings/Haskell",
+        "lastModified": 1737149905,
+        "narHash": "sha256-O3+D1o2iQwEK5Go8wAFYyi2PnttugSucLBRAubNSyk0=",
+        "owner": "xecarlox94",
+        "repo": "p2p-rendering-computation",
+        "rev": "fe69b46ab88cdb8048facc2590c7f9418a87dd05",
+        "type": "github"
+      },
+      "original": {
+        "dir": "Bindings/Haskell",
+        "owner": "xecarlox94",
+        "ref": "nix-flake",
+        "repo": "p2p-rendering-computation",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1737149334,
+        "narHash": "sha256-TMxSf8tr7KblHN07wAVYmCArGMJ8VdWDklN7+6DqV/A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "758fd693054cca5b555461e8767f1b63ae7bc7e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1737149334,
         "narHash": "sha256-TMxSf8tr7KblHN07wAVYmCArGMJ8VdWDklN7+6DqV/A=",
@@ -35,8 +72,8 @@
     },
     "root": {
       "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "hsp2prc": "hsp2prc",
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {
