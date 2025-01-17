@@ -1,38 +1,19 @@
 {
-  description = "Nix flake for P2PRC Haskell library";
+  description = "P2PRC Haskell library";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    p2prc.url = "path:../../";
+    nixpkgs.url = "github:NixOS/nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, p2prc, ... }:
-    let
-
-    allSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-
-    forAllSystems = function:
-      nixpkgs.lib.genAttrs allSystems
-        (system: function
-          {
-            pkgs=nixpkgs.legacyPackages.${system};
-            inherit system;
-          }
-        );
-
-    in
-    {
-    packages = forAllSystems ({pkgs, system}:
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
       {
-        default = pkgs.cowsay;
-        p2prc=p2prc.outputs.packages.${system}.default;
-      });
-
-    devShells = forAllSystems ({pkgs, system}:
-      {
-        default = pkgs.mkShell {
-          buildInputs = [p2prc.outputs.packages.${system}.default];
-        };
-      });
-    };
+        packages.default = pkgs.haskellPackages.callCabal2nix "p2prc" ./. {};
+      }
+    );
 }
+
