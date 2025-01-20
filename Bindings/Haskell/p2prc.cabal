@@ -11,9 +11,7 @@ name:               p2prc
 version:            0.1.0.0
 
 synopsis:           P2PRC haskell library
-
 description:        Implements a client interface to the P2PRC networking runtime
-
 author:             xecarlox94
 
 maintainer:         jf94.uk@gmail.com
