@@ -11,7 +11,7 @@ import (
 )
 
 // VERSION specifies the version of the platform
-var VERSION = "2.0.0"
+var VERSION = "3.0.0"
 var mode string
 
 // Varaibles if mode is client
@@ -32,10 +32,6 @@ func getFireSignalsChannel() chan os.Signal {
 	)
 	return c
 
-}
-
-func exit() {
-	syscall.Kill(syscall.Getpid(), syscall.SIGTERM)
 }
 
 func main() {

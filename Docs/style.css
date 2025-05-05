@@ -23,3 +23,7 @@ h4,h5,h6{
     color: #b96c29;
     font-weight:300;
 }
+
+.video {
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.3);
+  }

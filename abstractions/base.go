@@ -86,3 +86,24 @@ func ViewIPTable() (table *p2p.IpAddresses, err error) {
 func UpdateIPTable() (err error) {
 	return clientIPTable.UpdateIpTableListClient()
 }
+
+// AddCustomInformation allows to pass custom information
+// through the network to which can be listened on
+// all peers in the network to execute a task.
+func AddCustomInformation(information string) error {
+	return clientIPTable.AddCustomInformationToIPTable(information)
+}
+
+// AddRootNode Adds root node to the network by using defaults except for
+// ip address and port no. Supports only IPV4 as of now.
+func AddRootNode(rootIP string, portNo string) error {
+	var rootNode []p2p.IpAddress
+
+	rootNode = append(rootNode, p2p.IpAddress{
+		Name:       "",
+		Ipv4:       rootIP,
+		ServerPort: portNo,
+		NAT:        false,
+	})
+	return generate.GenerateIPTableFile(rootNode)
+}

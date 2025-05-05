@@ -3,15 +3,13 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/search.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css"/>
 
-#+attr_html: :width 300px
-[[./Colored-On-Light-Image.png]]
+#+attr_html: :width 300px :align center
+[[./artwork/p2prc-logos/Colored-On-Light-Image.png]]
 
 * Guide through video
 *** The video below shows the setup and usage of P2PRC.
 #+attr_html: :class video
 [[https://www.youtube.com/watch?v=OMwCpedu5cs][https://i3.ytimg.com/vi/OMwCpedu5cs/maxresdefault.jpg]]
-
-*** Source code: https://github.com/Akilan1999/p2p-rendering-computation
 
 * Introduction
 :PROPERTIES:
@@ -356,14 +354,6 @@ p2prc --mp <port no to map> --dn <domain name to link Mapped port against> --ra 
 
 --------------
 
-*** Add root node
-Adds a root node to P2RRC and overwrites all other nodes in the ip table. 
-To be only added before the network is started and with
-the intention of a fresh instance.
-#+begin_example
-p2prc --arn --ip <root node ip address> -p <root node port no>
-#+end_example
-
 * P2P Module Implementation
 :PROPERTIES:
 :CUSTOM_ID: p2p-module-implementation
@@ -375,7 +365,7 @@ to determine upload and download speeds. This valuable information enables users
 servers with optimal performance, enhancing their overall network experience.
 
 #+caption: UML diagram of P2P module
-[[file:./images/p2pmoduleArch.png]
+[[file:Docs/images/p2pmoduleArch.png]
 
 The peer to peer implementation was built from scratch. This is because
 other peer to peer libraries were on the implementation of the
@@ -795,7 +785,6 @@ func main() {
 
    
  - Video tutorial:
- #+attr_html: :class video
  [[https://youtu.be/rN4SiVowg5E][https://i3.ytimg.com/vi/rN4SiVowg5E/maxresdefault.jpg]]
 
 This is a fun expirement for anyone to try to quickly run a server and
@@ -917,4 +906,4 @@ network nodes.
        other nodes can access the Morello board who have permission access.
 
 #+CAPTION: Implementation idea (To be improved upon)
- [[./images/P2PRCRemoteNodes.png]]
+ [[./Docs/images/P2PRCRemoteNodes.png]]

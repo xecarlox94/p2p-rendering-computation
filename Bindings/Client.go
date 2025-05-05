@@ -142,6 +142,24 @@ func MapPort(Port string, DomainName string, ServerAddress string) *C.char {
 	return C.CString(Address.EntireAddress)
 }
 
+//export CustomInformation
+func CustomInformation(CustomInformation string) *C.char {
+	err := abstractions.AddCustomInformation(CustomInformation)
+	if err != nil {
+		return C.CString(err.Error())
+	}
+	return C.CString("Success")
+}
+
+//export AddRootNode
+func AddRootNode(IP string, Port string) *C.char {
+	err := abstractions.AddRootNode(IP, Port)
+	if err != nil {
+		return C.CString(err.Error())
+	}
+	return C.CString("Success")
+}
+
 // --------------------------------- Controlling Server  ----------------------------------------
 
 //export Server
