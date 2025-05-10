@@ -25,8 +25,6 @@ import API
 -- URGENT TASKS
 --
 --
--- TODO: add Haddock documentation
---
 -- TODO: P2PRC setup
   -- check version P2PRC: only run if version if above a certain value
   -- setup p2prc command

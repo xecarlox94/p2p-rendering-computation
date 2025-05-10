@@ -149,7 +149,6 @@ p2prcAPI =
       [CLIOpt] -> StdInput -> IOEitherError a
 
   execProcP2PRCParser = eitherExecProcessParser p2prcCmdName
-  -- TODO: GHC question, why does it scope down instead staying generic
 
   -- execProcP2PRC = eitherExecProcess p2prcCmdName
 

@@ -22,27 +22,33 @@ build-type:         Simple
 extra-doc-files:    README.md
 
 
-common warnings
+common common-properties
+
     ghc-options:        -Wall
+
+    default-extensions:
+      GADTSyntax
+      OverloadedStrings
+
+    default-language:   GHC2021
+
 
 executable p2prc
 
-    import:             warnings
+    import:             common-properties
 
     hs-source-dirs:     src
 
     main-is:            Main.hs
 
-    other-extensions:   OverloadedStrings
 
     build-depends:      base
                       , p2prc
 
-    default-language:   GHC2021
 
 library
 
-    import:             warnings
+    import:             common-properties
 
     build-depends:      base
                       , text
@@ -60,5 +66,3 @@ library
                       , CLI
                       , JSON
                       , Error
-
-    default-language:   GHC2021
