@@ -57,3 +57,6 @@ result-*
 
 # Rust ignore files
 target/
+
+# ignore direnv
+.direnv/
