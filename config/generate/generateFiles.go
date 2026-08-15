@@ -195,7 +195,7 @@ func MakeSSHKeyPair(pubKeyPath, privateKeyPath string) error {
 		return err
 	}
 
-	// Set permission to private key to SSH into docker machine
+	// Set permission to private key to SSH
 	err = os.Chmod(privateKeyPath, 600)
 	if err != nil {
 		return err

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/Akilan1999/p2p-rendering-computation/config"
 	"io/ioutil"
@@ -126,6 +127,22 @@ func (i *IpAddresses) WriteIpTable() error {
 	return nil
 }
 
+// SearchMachine searches for a machine based on a name provided
+// on the ip table
+func SearchMachine(MachineName string) (*IpAddress, error) {
+	table, err := ReadIpTable()
+	if err != nil {
+		return nil, err
+	}
+
+	for i, _ := range table.IpAddress {
+		if table.IpAddress[i].Name == MachineName {
+			return &table.IpAddress[i], nil
+		}
+	}
+	return nil, errors.New("machine name not found")
+}
+
 // PrintIpTable Print Ip table data for Cli
 func PrintIpTable() error {
 	table, err := ReadIpTable()
@@ -175,6 +192,33 @@ func (table *IpAddresses) RemoveDuplicates() error {
 	}
 
 	table.IpAddress = NoDuplicates.IpAddress
+
+	return nil
+}
+
+// RemoveIPTableEntry Remove IP table name based on the name provided
+func RemoveIPTableEntry(Name string) error {
+	targets, err := ReadIpTable()
+	if err != nil {
+		return err
+	}
+
+	// A very stupid way to remove an element from a list
+	var ActiveIP IpAddresses
+
+	// Index to remove from struct
+	for _, value := range targets.IpAddress {
+		if value.Name != Name {
+			ActiveIP.IpAddress = append(ActiveIP.IpAddress, value)
+		}
+	}
+
+	targets.IpAddress = ActiveIP.IpAddress
+
+	err = targets.WriteIpTable()
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

@@ -159,7 +159,7 @@ func (s *IpAddress) PingTest() error {
         pingURL = "http://" + s.Ipv4 + ":" + s.ServerPort + "/server_info"
     }
 
-    l := time.Duration(100000000000) // 10sec
+    l := time.Duration(4 * time.Second) // 4sec
     for i := 0; i < 3; i++ {
         sTime := time.Now()
         resp, err := http.Get(pingURL)
@@ -174,6 +174,22 @@ func (s *IpAddress) PingTest() error {
     }
 
     s.Latency = time.Duration(int64(l.Nanoseconds() / 2))
+
+    return nil
+}
+
+func PingTest(url string) error {
+    sTime := time.Now()
+    resp, err := http.Get(url)
+    fTime := time.Now()
+    if err != nil || resp.StatusCode != 200 {
+        return errors.New("Node not found")
+    }
+    l := time.Duration(4 * time.Second) // 4sec
+    if fTime.Sub(sTime) < l {
+        l = fTime.Sub(sTime)
+    }
+    resp.Body.Close()
 
     return nil
 }

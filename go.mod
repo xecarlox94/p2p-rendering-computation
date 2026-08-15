@@ -1,14 +1,15 @@
 module github.com/Akilan1999/p2p-rendering-computation
 
-go 1.23.2
+go 1.25.0
 
 require (
 	github.com/apenella/go-ansible v1.1.0
 	github.com/docker/docker v20.10.0-beta1.0.20201113105859-b6bfff2a628f+incompatible
 	github.com/fatedier/frp v0.45.0
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-co-op/gocron/v2 v2.22.0
 	github.com/go-git/go-git/v5 v5.4.2
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.6.0
 	github.com/ihciah/rust2go v0.0.0-20251105132719-caedb7aac7b2
 	github.com/lithammer/shortuuid v3.0.0+incompatible
 	github.com/otiai10/copy v1.6.0
@@ -16,7 +17,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.22.10
 	github.com/urfave/cli/v2 v2.3.0
 	gitlab.com/NebulousLabs/go-upnp v0.0.0-20181011194642-3a71999ed0d3
-	golang.org/x/crypto v0.16.0
+	golang.org/x/crypto v0.54.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
@@ -41,6 +42,7 @@ require (
 	github.com/fatedier/golib v0.1.1-0.20220321042308-c306138b83ac // indirect
 	github.com/fatedier/kcp-go v2.0.4-0.20190803094908-fe8645b0a904+incompatible // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
+	github.com/gliderlabs/ssh v0.3.9-0.20250127223818-909fa952d4e4 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.3.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
@@ -54,6 +56,7 @@ require (
 	github.com/hashicorp/yamux v0.1.1 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
+	github.com/jonboulle/clockwork v0.5.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.6 // indirect
@@ -77,6 +80,7 @@ require (
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
+	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
@@ -89,10 +93,10 @@ require (
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	gitlab.com/NebulousLabs/fastrand v0.0.0-20181126182046-603482d69e40 // indirect
-	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/net v0.56.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220223155221-ee480838109b // indirect
-	golang.org/x/sys v0.29.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 	golang.org/x/time v0.0.0-20220210224613-90d013bbcef8 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/genproto v0.0.0-20201110150050-8816d57aaa9a // indirect

@@ -4,6 +4,7 @@ import (
 	"github.com/Akilan1999/p2p-rendering-computation/server/docker"
 	"github.com/fatedier/frp/client"
 	"github.com/fatedier/frp/pkg/config"
+	"github.com/fatedier/frp/pkg/util/log"
 	"github.com/phayes/freeport"
 	"math/rand"
 	"strconv"
@@ -34,6 +35,25 @@ type ClientMapping struct {
 // to open. This under the assumption the user knows the
 // exact port available in server doing the TURN connection.
 func StartFRPClientForServer(ipaddress string, port string, localport string, remoteport string, udp bool) (string, error) {
+	// Setting a 3 second timeout for the server
+	// for the ping test. This is the circumstance
+	// that the server can take at most 2 seconds to
+	// start locally the server.
+	//	var i int
+	//	responseTimeout := 5 * time.Second
+	//
+	//	deadline := time.Now().Add(responseTimeout)
+	//	for time.Now().Before(deadline) {
+	//		err := p2p.PingTest("http://" + ipaddress + ":" + port)
+	//		if err == nil {
+	//			goto successful
+	//		}
+	//		i++
+	//	}
+	//
+	//	return "", errors.New("FRP server not pingable")
+	//
+	//successful:
 	// Setup server information
 	var s Server
 	s.IPAddress = ipaddress
@@ -160,6 +180,17 @@ func (c *Client) StartFRPClient() error {
 
 	cfg.ServerAddr = c.Server.IPAddress
 	cfg.ServerPort = c.Server.Port
+	cfg.LogWay = "file"
+	cfg.LogLevel = "warn"
+	cfg.LogFile = "log.txt"
+
+	log.InitLog(
+		cfg.LogWay,
+		cfg.LogFile,
+		cfg.LogLevel,
+		cfg.LogMaxDays,
+		cfg.DisableLogColor,
+	)
 	//cfg.TLSEnable = true
 	//cfg.TLSKeyFile = Config.KeyFile
 	//cfg.TLSCertFile = Config.PemFile
